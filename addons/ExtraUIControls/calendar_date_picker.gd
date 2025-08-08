@@ -17,11 +17,11 @@ var selected_day: int = -1
 var day_labels = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"]
 var month_names = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
 
-func _ready():	
+func _ready():
 	var options = ""
 	for i in 200:
-		options += str(1900+i, "\n")
-	%YearsSpinBox.options = options	
+		options += str(1900 + i, "\n")
+	%YearsSpinBox.options = options
 	# Set up the calendar to the current month
 	var now = Time.get_datetime_dict_from_system()
 	current_year = now.year
@@ -37,9 +37,9 @@ func _ready():
 	prev_month_button.pressed.connect(_on_prev_month_pressed)
 	next_month_button.pressed.connect(_on_next_month_pressed)
 	month_year_label.pressed.connect(func():
-		day_buttons_grid.visible = false		
+		day_buttons_grid.visible = false
 		%YearsSpinBox.visible = true
-		%YearsSpinBox.set_deferred("value", current_year -1900 )
+		%YearsSpinBox.set_deferred("value", current_year - 1900)
 		%confirm_year_button.visible = true
 		month_year_label.disabled = true
 		%PrevMonthButton.disabled = true
@@ -47,7 +47,7 @@ func _ready():
 		
 	)
 	%confirm_year_button.pressed.connect(func():
-		day_buttons_grid.visible = true		
+		day_buttons_grid.visible = true
 		%YearsSpinBox.visible = false
 		%confirm_year_button.visible = false
 		month_year_label.disabled = false
@@ -124,18 +124,17 @@ func _update_calendar_view():
 		button.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 		button.size_flags_vertical = Control.SIZE_EXPAND_FILL
 		button.focus_mode = Control.FOCUS_NONE # Prevent focus from interfering with UI
-		button.button_down.connect(_on_day_pressed.bind(day))		
-		button.theme_type_variation = owner.theme_type_variation + "_" + "calendar_day"
+		button.button_down.connect(_on_day_pressed.bind(day))
+		button.theme_type_variation = theme_type_variation + "_" + "calendar_day"
 		# Highlight the selected day
 		if day == selected_day:
-			button.theme_type_variation = owner.theme_type_variation + "_" + "calendar_day_selected"
+			button.theme_type_variation = theme_type_variation + "_" + "calendar_day_selected"
 			button.add_theme_color_override("font_color", Color.RED)
 			#button.add_theme_stylebox_override("normal", get_theme().get_stylebox("panel", "PanelContainer"))
 			#button.get_stylebox("normal").bg_color = Color("#4a90e2") # A nice blue
 			
-		day_buttons_grid.add_child(button)	
+		day_buttons_grid.add_child(button)
 func _on_day_pressed(day: int):
-	
 	selected_day = day
 	date_selected.emit({
 		"year": current_year,
