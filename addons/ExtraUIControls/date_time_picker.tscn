@@ -1,0 +1,70 @@
+[gd_scene load_steps=3 format=3 uid="uid://c26nytgyybwh1"]
+
+[ext_resource type="Script" uid="uid://ndyns60i1pij" path="res://addons/ExtraUIControls/date_time_picker.gd" id="1_1rst6"]
+[ext_resource type="PackedScene" uid="uid://0irbv5jkmaof" path="res://addons/ExtraUIControls/spin_box_extra.tscn" id="2_k3dhl"]
+
+[node name="DateTimePicker" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_1rst6")
+font_size = 32
+show_buttons = true
+order = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 48.0
+grow_horizontal = 2
+
+[node name="YearSpinBox" parent="HBoxContainer" instance=ExtResource("2_k3dhl")]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(122, 69)
+layout_mode = 2
+show_buttons = false
+margins = 12
+
+[node name="MonthSpinBox" parent="HBoxContainer" instance=ExtResource("2_k3dhl")]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(42, 69)
+layout_mode = 2
+show_buttons = false
+margins = 12
+
+[node name="DaySpinBox" parent="HBoxContainer" instance=ExtResource("2_k3dhl")]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(42, 69)
+layout_mode = 2
+show_buttons = false
+margins = 12
+
+[node name="Label" type="Label" parent="HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 1
+text = ":"
+vertical_alignment = 1
+
+[node name="HourSpinBox" parent="HBoxContainer" instance=ExtResource("2_k3dhl")]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(42, 69)
+layout_mode = 2
+show_buttons = false
+margins = 12
+
+[node name="MinuteSpinBox" parent="HBoxContainer" instance=ExtResource("2_k3dhl")]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(66, 69)
+layout_mode = 2
+show_buttons = false
+margins = 12
+
+[node name="NowButton" type="Button" parent="HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Now"

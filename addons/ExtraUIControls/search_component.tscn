@@ -1,0 +1,42 @@
+[gd_scene load_steps=4 format=3 uid="uid://dl27xojitjda0"]
+
+[ext_resource type="Script" uid="uid://clius1x1pfme0" path="res://addons/ExtraUIControls/search_component.gd" id="1_ohmcf"]
+[ext_resource type="Texture2D" uid="uid://m6cke3g8yiw3" path="res://addons/ExtraUIControls/icons/search_icon.svg" id="2_kncb0"]
+[ext_resource type="Texture2D" uid="uid://buo6fr7avt1oq" path="res://addons/ExtraUIControls/icons/icon_close.svg" id="3_nmuht"]
+
+[node name="search" type="HBoxContainer"]
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("1_ohmcf")
+
+[node name="search_button" type="Button" parent="."]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(36, 0)
+layout_mode = 2
+focus_mode = 0
+disabled = true
+icon = ExtResource("2_kncb0")
+expand_icon = true
+
+[node name="PanelContainer" type="PanelContainer" parent="."]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="search_hbox" type="HBoxContainer" parent="PanelContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="search_box" type="LineEdit" parent="PanelContainer/search_hbox"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+expand_to_text_length = true
+
+[node name="clear_button" type="Button" parent="PanelContainer/search_hbox"]
+unique_name_in_owner = true
+visible = false
+custom_minimum_size = Vector2(32, 0)
+layout_mode = 2
+icon = ExtResource("3_nmuht")
+expand_icon = true

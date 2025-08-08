@@ -1,0 +1,264 @@
+[gd_scene load_steps=19 format=3 uid="uid://brph3xwt38hpy"]
+
+[ext_resource type="PackedScene" uid="uid://d22l2ehhu8xsq" path="res://addons/ExtraUIControls/modal.tscn" id="1_uhqqe"]
+[ext_resource type="PackedScene" uid="uid://b6g6iwafolvqs" path="res://addons/ExtraUIControls/pagination.tscn" id="2_ia1lp"]
+[ext_resource type="PackedScene" uid="uid://cgt657e4n0pk0" path="res://addons/ExtraUIControls/accordion.tscn" id="3_coq8p"]
+[ext_resource type="PackedScene" uid="uid://den4sw3hsbw3x" path="res://addons/ExtraUIControls/option_button_spinbox.tscn" id="3_njel3"]
+[ext_resource type="PackedScene" uid="uid://dso412x6fpqkl" path="res://addons/ExtraUIControls/button_group_control.tscn" id="3_sasra"]
+[ext_resource type="PackedScene" uid="uid://bho8o6h3xki8f" path="res://addons/ExtraUIControls/calendar_date_picker.tscn" id="4_buypi"]
+[ext_resource type="PackedScene" uid="uid://0irbv5jkmaof" path="res://addons/ExtraUIControls/spin_box_extra.tscn" id="6_8pr8v"]
+[ext_resource type="PackedScene" uid="uid://csgaqhvbncb00" path="res://addons/ExtraUIControls/panel_margin_container.tscn" id="10_vr1i5"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rpuu0"]
+bg_color = Color(0.437827, 0.616476, 0.806671, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vr1i5"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_njel3"]
+content_margin_left = 2.0
+content_margin_top = 2.0
+content_margin_right = 2.0
+content_margin_bottom = 2.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_njel3"]
+content_margin_left = 2.0
+content_margin_top = 2.0
+content_margin_right = 2.0
+content_margin_bottom = 2.0
+draw_center = false
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+
+[sub_resource type="Theme" id="Theme_vr1i5"]
+blue_options_panel/base_type = &"PanelContainer"
+blue_options_panel/styles/panel = SubResource("StyleBoxFlat_rpuu0")
+blue_options_toggle_button/base_type = &"Button"
+blue_options_toggle_button/styles/normal = SubResource("StyleBoxFlat_vr1i5")
+spinbox_buttons/base_type = &"Button"
+spinbox_buttons/styles/disabled = SubResource("StyleBoxEmpty_njel3")
+spinbox_buttons/styles/focus = SubResource("StyleBoxEmpty_njel3")
+spinbox_buttons/styles/hover = SubResource("StyleBoxFlat_njel3")
+spinbox_buttons/styles/hover_pressed = SubResource("StyleBoxEmpty_njel3")
+spinbox_buttons/styles/normal = SubResource("StyleBoxEmpty_njel3")
+spinbox_buttons/styles/pressed = SubResource("StyleBoxEmpty_njel3")
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fbuy2"]
+bg_color = Color(0.388815, 0.339231, 0.137498, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0k8yu"]
+bg_color = Color(0.8, 0.464, 0.296, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_oo8pe"]
+bg_color = Color(0.296476, 0.546074, 0.306252, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4gito"]
+bg_color = Color(0.589352, 0.62582, 0.403582, 1)
+
+[sub_resource type="Theme" id="Theme_sasra"]
+Button/styles/normal = null
+pagination_navigation_button/base_type = &"Button"
+pagination_navigation_button/styles/disabled = SubResource("StyleBoxFlat_fbuy2")
+pagination_navigation_button/styles/normal = SubResource("StyleBoxFlat_0k8yu")
+pagination_page_button/base_type = &"Button"
+pagination_page_button/styles/disabled = SubResource("StyleBoxFlat_oo8pe")
+pagination_page_button/styles/normal = SubResource("StyleBoxFlat_4gito")
+
+[node name="Control" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_vr1i5")
+metadata/_edit_lock_ = true
+
+[node name="background" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.256766, 0.180127, 0.411712, 1)
+metadata/_edit_lock_ = true
+
+[node name="sidebar" type="ColorRect" parent="."]
+custom_minimum_size = Vector2(40, 0)
+layout_mode = 1
+anchors_preset = 9
+anchor_bottom = 1.0
+offset_right = 30.0
+grow_vertical = 2
+color = Color(1, 0.6, 0.419608, 1)
+
+[node name="modal_toggle_button" type="Button" parent="sidebar"]
+layout_mode = 0
+offset_right = 35.0
+offset_bottom = 31.0
+toggle_mode = true
+text = "|||"
+
+[node name="Pagination" parent="." instance=ExtResource("2_ia1lp")]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.0
+offset_top = 1.0
+offset_bottom = 1.0
+grow_vertical = 1
+theme = SubResource("Theme_sasra")
+theme_type_variation = &"pagination"
+page_count = 5
+
+[node name="OptionButtonSpinbox" parent="." instance=ExtResource("3_njel3")]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+anchors_preset = 0
+anchor_right = 0.0
+offset_left = 215.0
+offset_top = 579.0
+offset_right = 315.0
+offset_bottom = 579.0
+theme_type_variation = &"blue_options"
+max_visible_options = 9
+allow_multiple = true
+allow_search = true
+
+[node name="OptionButtonSpinbox2" parent="." instance=ExtResource("3_njel3")]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+anchors_preset = 0
+anchor_right = 0.0
+offset_left = 354.0
+offset_top = 133.0
+offset_right = 454.0
+offset_bottom = 133.0
+max_visible_options = 9
+allow_search = true
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 11
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 0
+grow_vertical = 2
+
+[node name="Accordion" parent="MarginContainer" instance=ExtResource("3_coq8p")]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+
+[node name="Panel" type="Panel" parent="MarginContainer/Accordion"]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MarginContainer/Accordion/Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 2.0
+offset_right = 2.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "A panel where the words get wrapped"
+autowrap_mode = 3
+
+[node name="CalendarDatePicker" parent="MarginContainer/Accordion" instance=ExtResource("4_buypi")]
+layout_mode = 2
+
+[node name="JustALabel" type="Label" parent="MarginContainer/Accordion"]
+layout_mode = 2
+text = "fvdafvadf"
+
+[node name="SpinBoxExtra" parent="MarginContainer/Accordion" instance=ExtResource("6_8pr8v")]
+custom_minimum_size = Vector2(35, 46)
+layout_mode = 2
+size_flags_horizontal = 3
+font_size = 33
+margins = 0
+
+[node name="button_group_hbox" parent="." instance=ExtResource("3_sasra")]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+grow_vertical = 0
+alignment = 1
+
+[node name="Button" type="Button" parent="button_group_hbox"]
+layout_mode = 2
+text = "Bake"
+
+[node name="Button2" type="Button" parent="button_group_hbox"]
+layout_mode = 2
+text = "Break"
+
+[node name="Button3" type="Button" parent="button_group_hbox"]
+layout_mode = 2
+text = "Build"
+
+[node name="PanelMarginContainer" parent="." instance=ExtResource("10_vr1i5")]
+custom_minimum_size = Vector2(200, 200)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -184.0
+offset_top = -49.0
+offset_right = 16.0
+offset_bottom = 151.0
+
+[node name="MarginContainer" type="MarginContainer" parent="PanelMarginContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 12
+theme_override_constants/margin_top = 12
+theme_override_constants/margin_right = 12
+theme_override_constants/margin_bottom = 12
+
+[node name="Container" type="VBoxContainer" parent="PanelMarginContainer/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 4
+
+[node name="Modal" parent="." node_paths=PackedStringArray("trigger_button") instance=ExtResource("1_uhqqe")]
+visible = false
+layout_mode = 1
+anchors_preset = 9
+anchor_right = 0.0
+offset_right = 312.0
+grow_horizontal = 1
+trigger_button = NodePath("../sidebar/modal_toggle_button")
+
+[node name="ColorRect3" type="ColorRect" parent="Modal"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(1, 0.6, 0.419608, 1)
+
+[node name="ColorRect" type="ColorRect" parent="Modal"]
+custom_minimum_size = Vector2(20, 0)
+layout_mode = 1
+anchors_preset = 9
+anchor_bottom = 1.0
+grow_vertical = 2
+
+[node name="ColorRect2" type="ColorRect" parent="Modal"]
+custom_minimum_size = Vector2(20, 0)
+layout_mode = 1
+anchors_preset = 11
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 0
+grow_vertical = 2
+
+[editable path="PanelMarginContainer"]

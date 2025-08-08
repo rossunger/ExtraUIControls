@@ -1,0 +1,60 @@
+[gd_scene load_steps=4 format=3 uid="uid://0irbv5jkmaof"]
+
+[ext_resource type="Script" uid="uid://cnhwa77dlqsea" path="res://addons/ExtraUIControls/spin_box_extra.gd" id="1_oxf3j"]
+[ext_resource type="PackedScene" uid="uid://dw38gct5p01bo" path="res://addons/ExtraUIControls/spin_box_buttons.tscn" id="2_u46gr"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_oxf3j"]
+line_spacing = 0.0
+font_size = 50
+
+[node name="SpinBoxExtra" type="PanelContainer"]
+clip_contents = true
+custom_minimum_size = Vector2(78, 89)
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 89.0
+grow_horizontal = 2
+size_flags_vertical = 0
+script = ExtResource("1_oxf3j")
+margins = 22
+clip_options = true
+metadata/_edit_group_ = true
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Control" type="Control" parent="HBoxContainer/MarginContainer"]
+clip_contents = true
+custom_minimum_size = Vector2(0, 45)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+mouse_filter = 2
+
+[node name="SpinBoxLabel" type="Label" parent="HBoxContainer/MarginContainer/Control"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(18, 0)
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 1096.0
+grow_horizontal = 2
+size_flags_horizontal = 3
+text = "1
+2
+3
+4
+5
+6
+7"
+label_settings = SubResource("LabelSettings_oxf3j")
+horizontal_alignment = 1
+
+[node name="SpinBoxButtons" parent="HBoxContainer" instance=ExtResource("2_u46gr")]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 8
