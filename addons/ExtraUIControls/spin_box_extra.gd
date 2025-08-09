@@ -81,13 +81,13 @@ func update_sizes():
 		custom_minimum_size.x = max(custom_minimum_size.x, label.size.x + margins*2)		
 
 func _ready():			
-	if Engine.is_editor_hint(): return
-	update_sizes()
+	if Engine.is_editor_hint(): return	
 	label.get_parent().resized.connect(update_sizes)			
 	%SpinBoxButtons.up.connect(next)
 	%SpinBoxButtons.down.connect(previous)			
 	update_settings()
 	label.theme_type_variation = owner.theme_type_variation + "_" + "spinbox_label"
+	update_sizes()
 	
 func get_min_x()->int:
 	var rows = options.split("\n")

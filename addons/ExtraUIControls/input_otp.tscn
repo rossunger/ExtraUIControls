@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://m5hovspa3nvn"]
+
+[ext_resource type="Script" uid="uid://pcds5crxbl58" path="res://addons/ExtraUIControls/input_otp.gd" id="1_t7eaa"]
+
+[node name="InputOtp" type="HBoxContainer"]
+custom_minimum_size = Vector2(100, 30)
+script = ExtResource("1_t7eaa")
+answer = "12345678"

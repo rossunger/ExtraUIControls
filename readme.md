@@ -8,8 +8,10 @@ Copy files anywhere in your project. Add any of the .tscn to your scene to use t
 - Accordion: Collapsible sections. Automatically creates the toggle buttons that collapse each segment. transition_duration sets the speed of animation when changing segments. Starting_Item will be the open item, if set.<br> <img src="./screenshots/accordion.png">
 - ButtonGroupControl: each Button child will automatically share button group <br><br>
 - CalendarDatePicker: set_date() function and date_selected signal use a dictionary with "Year", "Month", and "Day <br><img src="./screenshots/calendarDatePicker.png">
+- Carousel: children of this node will be swipeable horizontally. Options for looping, left/right buttons, numbered "dots" to jump to item, and expand children vertically. There is an item_tapped(id, node) signal for when a child is clicked/tapped<br><img src="./screenshots/carousel.png">
 - DateTimePicker: set_datetime() function and datetime_changed signal use a dictionary with keys "year", "month", "day", "hour", and "minute". Display month as number or text<br><img src="./screenshots/dateTimePicker.png">
 <br><img src="./screenshots/dateTimePicker2.png">
+- InputOTP: a series of boxes as use for one-time-passwords. set the "answer" variable and it will create a lineEdit for each character. When you enter a character into a lineEdit, it shifts focus to the next lineEdit. after the final LineEdit, a signal is emitted<img src="./screenshots/input_otp.png">
 - Modal: Choose direction, dimming_amount, and tween duration. Can assign a trigger_button to toggle open/close or use code. close_on_click_outside will close the modal if it loses focus. relative_position will use local position instead of global<br><img src="./screenshots/modal.png">
 - OptionButtonSpinbox: options is a string with "\n" between each option. Option for single select or multiple select. Max_visible_options can limit the height of the popup. Automatically chooses if popup should be above or below. Can set font_size. Search optional. Up/Down buttons that scroll on hover optional. <br><img src="./screenshots/optionButtonSpinbox.png">
 - Pagination: Set the page count, and current page.<br><img src="./screenshots/pagination.png">
@@ -25,6 +27,8 @@ e.g. If you set an Accordion's theme_type_variation to "accordion_red", it's but
 ##### List Of Suffixes:
 Accordion: "_button"
 Calendar: "_calendar_day", "_calendar_day_selected"
+Carousel: "_dots_buttons", "_nav_buttons", "_hbox"
+InputOTP: "_line_edit"
 OptionButtonSpinBox: "_scroll_buttons", "_panel", "_toggle_button", "_button", "_options_vbox", "_search", "option_heading_button", "option_button" 
 Pagination: "_navigation_button", "_page_button"
 SpinBoxExtra: "_spinbox_label", 

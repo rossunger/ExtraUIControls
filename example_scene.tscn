@@ -1,6 +1,8 @@
-[gd_scene load_steps=19 format=3 uid="uid://brph3xwt38hpy"]
+[gd_scene load_steps=23 format=3 uid="uid://brph3xwt38hpy"]
 
 [ext_resource type="PackedScene" uid="uid://d22l2ehhu8xsq" path="res://addons/ExtraUIControls/modal.tscn" id="1_uhqqe"]
+[ext_resource type="PackedScene" uid="uid://dwdiwvkeqapeg" path="res://addons/ExtraUIControls/carousel.tscn" id="1_uhqqf"]
+[ext_resource type="PackedScene" uid="uid://m5hovspa3nvn" path="res://addons/ExtraUIControls/input_otp.tscn" id="1_uhqqg"]
 [ext_resource type="PackedScene" uid="uid://b6g6iwafolvqs" path="res://addons/ExtraUIControls/pagination.tscn" id="2_ia1lp"]
 [ext_resource type="PackedScene" uid="uid://cgt657e4n0pk0" path="res://addons/ExtraUIControls/accordion.tscn" id="3_coq8p"]
 [ext_resource type="PackedScene" uid="uid://den4sw3hsbw3x" path="res://addons/ExtraUIControls/option_button_spinbox.tscn" id="3_njel3"]
@@ -13,6 +15,12 @@
 bg_color = Color(0.437827, 0.616476, 0.806671, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vr1i5"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ylehy"]
+bg_color = Color(0.413397, 0.0862746, 0.224114, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gqfrt"]
+bg_color = Color(0.756558, 0.204669, 0.291038, 1)
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_njel3"]
 content_margin_left = 2.0
@@ -36,6 +44,10 @@ blue_options_panel/base_type = &"PanelContainer"
 blue_options_panel/styles/panel = SubResource("StyleBoxFlat_rpuu0")
 blue_options_toggle_button/base_type = &"Button"
 blue_options_toggle_button/styles/normal = SubResource("StyleBoxFlat_vr1i5")
+calendar_red_calendar_day/base_type = &"Button"
+calendar_red_calendar_day/styles/normal = SubResource("StyleBoxFlat_ylehy")
+calendar_red_calendar_day_selected/base_type = &"Button"
+calendar_red_calendar_day_selected/styles/normal = SubResource("StyleBoxFlat_gqfrt")
 spinbox_buttons/base_type = &"Button"
 spinbox_buttons/styles/disabled = SubResource("StyleBoxEmpty_njel3")
 spinbox_buttons/styles/focus = SubResource("StyleBoxEmpty_njel3")
@@ -85,22 +97,6 @@ grow_vertical = 2
 color = Color(0.256766, 0.180127, 0.411712, 1)
 metadata/_edit_lock_ = true
 
-[node name="sidebar" type="ColorRect" parent="."]
-custom_minimum_size = Vector2(40, 0)
-layout_mode = 1
-anchors_preset = 9
-anchor_bottom = 1.0
-offset_right = 30.0
-grow_vertical = 2
-color = Color(1, 0.6, 0.419608, 1)
-
-[node name="modal_toggle_button" type="Button" parent="sidebar"]
-layout_mode = 0
-offset_right = 35.0
-offset_bottom = 31.0
-toggle_mode = true
-text = "|||"
-
 [node name="Pagination" parent="." instance=ExtResource("2_ia1lp")]
 layout_mode = 1
 anchors_preset = 5
@@ -116,13 +112,14 @@ page_count = 5
 
 [node name="OptionButtonSpinbox" parent="." instance=ExtResource("3_njel3")]
 custom_minimum_size = Vector2(100, 0)
-layout_mode = 2
+layout_mode = 1
 anchors_preset = 0
 anchor_right = 0.0
-offset_left = 215.0
-offset_top = 579.0
-offset_right = 315.0
-offset_bottom = 579.0
+offset_left = 103.0
+offset_top = 23.0
+offset_right = 203.0
+offset_bottom = 23.0
+grow_horizontal = 1
 theme_type_variation = &"blue_options"
 max_visible_options = 9
 allow_multiple = true
@@ -130,24 +127,126 @@ allow_search = true
 
 [node name="OptionButtonSpinbox2" parent="." instance=ExtResource("3_njel3")]
 custom_minimum_size = Vector2(100, 0)
-layout_mode = 2
-anchors_preset = 0
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
 anchor_right = 0.0
-offset_left = 354.0
-offset_top = 133.0
-offset_right = 454.0
-offset_bottom = 133.0
+anchor_bottom = 1.0
+offset_left = 118.0
+offset_top = -81.0
+offset_right = 218.0
+offset_bottom = -81.0
+grow_horizontal = 1
+grow_vertical = 0
 max_visible_options = 9
 allow_search = true
 
-[node name="MarginContainer" type="MarginContainer" parent="."]
+[node name="Carousel" parent="." instance=ExtResource("1_uhqqf")]
 layout_mode = 1
-anchors_preset = 11
-anchor_left = 1.0
+anchors_preset = 4
+anchor_left = 0.0
+anchor_right = 0.0
+offset_left = 93.0
+offset_top = -158.0
+offset_right = 393.0
+offset_bottom = 142.0
+grow_horizontal = 1
+metadata/_edit_group_ = true
+
+[node name="ColorRect" type="ColorRect" parent="Carousel"]
+custom_minimum_size = Vector2(200, 100)
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+mouse_filter = 1
+
+[node name="Label2" type="Label" parent="Carousel/ColorRect"]
+layout_mode = 1
+anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-grow_horizontal = 0
+grow_horizontal = 2
 grow_vertical = 2
+text = "I am 1"
+
+[node name="ColorRect2" type="ColorRect" parent="Carousel"]
+custom_minimum_size = Vector2(200, 275)
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+mouse_filter = 1
+color = Color(0.768482, 0.525715, 0.713056, 1)
+
+[node name="Label" type="Label" parent="Carousel/ColorRect2"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "I am 2"
+
+[node name="ColorRect3" type="ColorRect" parent="Carousel"]
+custom_minimum_size = Vector2(300, 120)
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+mouse_filter = 1
+color = Color(0.263145, 0.583073, 0.595143, 1)
+
+[node name="Label2" type="Label" parent="Carousel/ColorRect3"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "I am 3"
+
+[node name="ColorRect4" type="ColorRect" parent="Carousel"]
+custom_minimum_size = Vector2(120, 200)
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+mouse_filter = 1
+color = Color(0.783722, 0.262911, 0.570255, 1)
+
+[node name="Label4" type="Label" parent="Carousel/ColorRect4"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "I am 4"
+
+[node name="ColorRect5" type="ColorRect" parent="Carousel"]
+custom_minimum_size = Vector2(120, 100)
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+mouse_filter = 1
+color = Color(0.844406, 0.71719, 0.86321, 1)
+
+[node name="Label3" type="Label" parent="Carousel/ColorRect5"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "I am 5"
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -221.0
+offset_top = 16.0
+offset_right = -21.0
+offset_bottom = 325.0
+grow_horizontal = 0
 
 [node name="Accordion" parent="MarginContainer" instance=ExtResource("3_coq8p")]
 custom_minimum_size = Vector2(200, 0)
@@ -171,6 +270,7 @@ autowrap_mode = 3
 
 [node name="CalendarDatePicker" parent="MarginContainer/Accordion" instance=ExtResource("4_buypi")]
 layout_mode = 2
+theme_type_variation = &"calendar_red"
 
 [node name="JustALabel" type="Label" parent="MarginContainer/Accordion"]
 layout_mode = 2
@@ -182,6 +282,10 @@ layout_mode = 2
 size_flags_horizontal = 3
 font_size = 33
 margins = 0
+
+[node name="InputOTP" parent="MarginContainer/Accordion" instance=ExtResource("1_uhqqg")]
+layout_mode = 2
+answer = "12345"
 
 [node name="button_group_hbox" parent="." instance=ExtResource("3_sasra")]
 layout_mode = 1
@@ -203,17 +307,14 @@ layout_mode = 2
 text = "Build"
 
 [node name="PanelMarginContainer" parent="." instance=ExtResource("10_vr1i5")]
-custom_minimum_size = Vector2(200, 200)
 layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -184.0
-offset_top = -49.0
-offset_right = 16.0
-offset_bottom = 151.0
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+offset_left = -109.0
+offset_top = -104.0
+grow_horizontal = 0
+grow_vertical = 0
 
 [node name="MarginContainer" type="MarginContainer" parent="PanelMarginContainer"]
 layout_mode = 2
@@ -225,6 +326,22 @@ theme_override_constants/margin_bottom = 12
 [node name="Container" type="VBoxContainer" parent="PanelMarginContainer/MarginContainer"]
 layout_mode = 2
 theme_override_constants/separation = 4
+
+[node name="sidebar" type="ColorRect" parent="."]
+custom_minimum_size = Vector2(40, 0)
+layout_mode = 1
+anchors_preset = 9
+anchor_bottom = 1.0
+offset_right = 40.0
+grow_vertical = 2
+color = Color(1, 0.6, 0.419608, 1)
+
+[node name="modal_toggle_button" type="Button" parent="sidebar"]
+layout_mode = 0
+offset_right = 35.0
+offset_bottom = 31.0
+toggle_mode = true
+text = "|||"
 
 [node name="Modal" parent="." node_paths=PackedStringArray("trigger_button") instance=ExtResource("1_uhqqe")]
 visible = false
