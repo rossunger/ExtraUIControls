@@ -29,12 +29,12 @@ var _touch_start_pos: Vector2
 var _dot_buttons = []
 
 func _ready() -> void:
-	item_tapped.connect(func(id, node): print(id, ":", node))	
+	item_tapped.connect(func(id, node): print(id, ":", node))
 	_items.clear()
 	for child in get_children():
 		if child is Control:
 			_items.append(child)
-			child.size_flags_vertical = SIZE_EXPAND_FILL if expand_children_vertically else SIZE_SHRINK_CENTER 
+			child.size_flags_vertical = SIZE_EXPAND_FILL if expand_children_vertically else SIZE_SHRINK_CENTER
 			remove_child(child)
 
 	_container = HBoxContainer.new()
@@ -43,10 +43,10 @@ func _ready() -> void:
 	_container.anchor_bottom = 1.0
 	_container.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	add_child(_container)
-	_container.theme_type_variation = theme_type_variation + "_hbox"	
+	_container.theme_type_variation = theme_type_variation + "_hbox"
 	if spacing > -1:
 		_container.add_theme_constant_override("separation", spacing)
-	else: 
+	else:
 		spacing = _container.get_theme_constant("separation", theme_type_variation + "_hbox") # _container.theme_type_variation)
 
 	if loop and _items.size() >= visible_count + 2:
@@ -68,12 +68,12 @@ func _ready() -> void:
 	for i in _container.get_child_count():
 		var item: Control = _container.get_child(i)
 		item.gui_input.connect(func(event: InputEvent):
-			if event is InputEventScreenTouch and not event.pressed:								
-				if not _is_dragging: 
-					item_tapped.emit(_real_index(i), item)				
+			if event is InputEventScreenTouch and not event.pressed:
+				if not _is_dragging:
+					item_tapped.emit(_real_index(i), item)
 		)
 
-	_tween = create_tween()	
+	_tween = create_tween()
 	_tween.kill()
 
 	if enable_buttons:
@@ -81,20 +81,20 @@ func _ready() -> void:
 	if show_dots:
 		var hbox = HBoxContainer.new()
 		hbox.alignment = BoxContainer.ALIGNMENT_CENTER
-		add_child(hbox)							
+		add_child(hbox)
 		var button_group = ButtonGroup.new()
 		for i in len(_items):
 			var button = Button.new()
 			_dot_buttons.push_back(button)
 			hbox.add_child(button)
-			button.text = str(i+1) if dots_numbered else ""			
+			button.text = str(i + 1) if dots_numbered else ""
 			button.toggle_mode = true
 			button.button_group = button_group
 			if i == _current_index:
-				button.button_pressed = true			
+				button.button_pressed = true
 			button.toggled.connect(func(on): if on: jump_to(i))
-			button.theme_type_variation = theme_type_variation + "_dots_buttons" 
-		hbox.set_anchors_and_offsets_preset(PRESET_BOTTOM_WIDE)		
+			button.theme_type_variation = theme_type_variation + "_dots_buttons"
+		hbox.set_anchors_and_offsets_preset(PRESET_BOTTOM_WIDE)
 	_positions = _get_cumulative_widths()
 	_update_positions(true)
 	
@@ -119,13 +119,13 @@ func _get_cumulative_widths() -> Array[float]:
 		x_offset += item.size.x + spacing
 	return positions
 
-func _update_positions(immediate: bool = false) -> void:	
-	var max_index: int = _container.get_child_count() - 1	
+func _update_positions(immediate: bool = false) -> void:
+	var max_index: int = _container.get_child_count() - 1
 	var target_x: float = 0.0
-	if _current_index >= 0 and _current_index <= max_index:		
-		target_x = -_positions[_current_index] #+ _drag_offset_x
+	if _current_index >= 0 and _current_index <= max_index:
+		target_x = - _positions[_current_index] # + _drag_offset_x
 	if align_center:
-		target_x += (size.x - _container.get_child(_current_index).size.x)/2
+		target_x += (size.x - _container.get_child(_current_index).size.x) / 2
 	if immediate:
 		if _tween.is_running(): await _tween.finished
 		_container.position.x = target_x
@@ -138,11 +138,11 @@ func _update_positions(immediate: bool = false) -> void:
 		#_dot_buttons[i].set_pressed_no_signal(i== _current_index)	
 func next() -> void:
 	if loop:
-		_current_index += 1		
+		_current_index += 1
 		_update_positions()
 		_check_loop_bounds_delayed()
 	else:
-		if _current_index < _container.get_child_count() -1:# - visible_count:
+		if _current_index < _container.get_child_count() - 1: # - visible_count:
 			_current_index += 1
 			_update_positions()
 
@@ -158,81 +158,81 @@ func prev() -> void:
 
 func jump_to(index: int) -> void:
 	if loop:
-		_current_index = index + visible_count		
+		_current_index = index + visible_count
 		_update_positions()
 		_check_loop_bounds_delayed()
 	else:
-		_current_index = clamp(index, 0, _container.get_child_count() -1)#- visible_count)
+		_current_index = clamp(index, 0, _container.get_child_count() - 1) # - visible_count)
 		_update_positions()
 
 func _check_loop_bounds_delayed() -> void:
 	var max_index: int = _container.get_child_count() - visible_count - 1
-	var min_index: int = visible_count 
+	var min_index: int = visible_count
 	await get_tree().create_timer(animation_speed).timeout
 	if _current_index > max_index:
-		_current_index = min_index		
+		_current_index = min_index
 		_update_positions(true)
-	elif _current_index < min_index-1:
+	elif _current_index < min_index - 1:
 		_current_index = max_index - 1
-		_update_positions(true)	
+		_update_positions(true)
 
 func _gui_input(event: InputEvent) -> void:
 	if not enable_touch:
 		return
 
 	if event is InputEventScreenTouch:
-		if event.pressed:					
+		if event.pressed:
 			_touch_active = true
 			_is_dragging = false
 			_touch_start_pos = event.position + global_position
 			_tween.kill()
 			_touch_active = true
-			Input.mouse_mode = Input.MOUSE_MODE_CAPTURED			
-		else:			
+			Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+		else:
 			Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 			Input.warp_mouse(_touch_start_pos)
-			_touch_active = false			
+			_touch_active = false
 			if _is_dragging:
 				#var positions: Array[float] = _get_cumulative_widths()
 				if _tween.is_running():
 					pass
 				var pos_x: float = fmod(_container.position.x, _positions[-1])
 				var closest_idx: int = 0
-				var closest_dist: float = 1e10				
+				var closest_dist: float = 1e10
 				for i in _positions.size():
-					var dist: float = abs(-_positions[i] - pos_x + size.x/2 - _container.get_child(i).size.x/2)
+					var dist: float = abs(-_positions[i] - pos_x + size.x / 2 - _container.get_child(i).size.x / 2)
 					if dist < closest_dist:
 						closest_dist = dist
-						closest_idx = i				
-				_current_index = closest_idx								
-				_update_positions()			
-				_check_loop_bounds_delayed()					
+						closest_idx = i
+				_current_index = closest_idx
+				_update_positions()
+				_check_loop_bounds_delayed()
 				_is_dragging = false
 
-	if event is InputEventScreenDrag and _touch_active:		
+	if event is InputEventScreenDrag and _touch_active:
 		var delta_x: float = event.relative.x
 		if abs(delta_x) > 2:
 			_is_dragging = true
 			if _tween.is_running(): _tween.kill()
 			var new_x = _container.position.x + delta_x
 			if loop:
-				if new_x > 0 and event.relative.x > 0: new_x -= _positions[len(_items)]			
+				if new_x > 0 and event.relative.x > 0: new_x -= _positions[len(_items)]
 				if -new_x > _positions[len(_items)] and event.relative.x < 0: new_x += _positions[len(_items)]
-			_container.position.x = new_x			
+			_container.position.x = new_x
 						
 func _add_nav_buttons() -> void:
 	var prev_button := Button.new()
-	prev_button.text = "<"	
+	prev_button.text = "<"
 	prev_button.pressed.connect(prev)
 	add_child(prev_button)
 	prev_button.name = "prev"
 	prev_button.set_anchors_and_offsets_preset(PRESET_CENTER_LEFT)
-	prev_button.theme_type_variation = theme_type_variation + "_nav_buttons" 
+	prev_button.theme_type_variation = theme_type_variation + "_nav_buttons"
 	
 	var next_button := Button.new()
-	next_button.text = ">"	
+	next_button.text = ">"
 	next_button.pressed.connect(next)
 	add_child(next_button)
 	next_button.name = "next"
 	next_button.set_anchors_and_offsets_preset(PRESET_CENTER_RIGHT)
-	next_button.theme_type_variation = theme_type_variation + "_nav_buttons" 
+	next_button.theme_type_variation = theme_type_variation + "_nav_buttons"
