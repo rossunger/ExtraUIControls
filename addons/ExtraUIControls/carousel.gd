@@ -29,6 +29,8 @@ var _touch_start_pos: Vector2
 var _dot_buttons = []
 
 func _ready() -> void:
+	if Engine.is_editor_hint() and EditorInterface.get_edited_scene_root().is_ancestor_of(self):
+		return
 	item_tapped.connect(func(id, node): print(id, ":", node))
 	_items.clear()
 	for child in get_children():
@@ -177,6 +179,8 @@ func _check_loop_bounds_delayed() -> void:
 		_update_positions(true)
 
 func _gui_input(event: InputEvent) -> void:
+	if Engine.is_editor_hint() and EditorInterface.get_edited_scene_root().is_ancestor_of(self):
+		return
 	if not enable_touch:
 		return
 

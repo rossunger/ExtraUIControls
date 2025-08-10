@@ -26,10 +26,10 @@ e.g. If you set an Accordion's theme_type_variation to "accordion_red", it's but
 
 ##### List Of Suffixes:
 Accordion: "_button"
-Calendar: "_calendar_day", "_calendar_day_selected"
+Calendar: "_calendar_day", "_calendar_day_selected", "_years_spinbox", "_calendar_day_blank"
 Carousel: "_dots_buttons", "_nav_buttons", "_hbox"
 InputOTP: "_line_edit"
 OptionButtonSpinBox: "_scroll_buttons", "_panel", "_toggle_button", "_button", "_options_vbox", "_search", "option_heading_button", "option_button" 
-Pagination: "_navigation_button", "_page_button"
-SpinBoxExtra: "_spinbox_label", 
+Pagination: "_navigation_button", "_page_button", "_hbox"
+SpinBoxExtra: "_spinbox_label", "_spinbox_buttons_control"
 SpinBoxButtons: "_vbox", "_up_button","_down_button"

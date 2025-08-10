@@ -27,6 +27,8 @@ var scroll_direction = 0
 var first_popup = true
 
 func _ready():
+	if Engine.is_editor_hint() and EditorInterface.get_edited_scene_root().is_ancestor_of(self):
+		return
 	add_child(drag_timer)
 	drag_timer.timeout.connect(toggle_button_from_selection)
 	options_popup_window.visible = false
@@ -199,6 +201,8 @@ func _physics_process(delta):
 		options_container.position.y = clamp(options_container.position.y + delta * 10 * (font_size), get_max_scroll_y(), 0)
 
 func _input(event):
+	if Engine.is_editor_hint() and EditorInterface.get_edited_scene_root().is_ancestor_of(self):
+		return
 	if event is InputEventScreenTouch and event.pressed:
 		if not options_popup_window.get_visible_rect().has_point(event.position):
 			if not options_button.get_global_rect().has_point(event.position):

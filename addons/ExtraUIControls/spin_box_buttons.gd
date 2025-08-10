@@ -1,14 +1,17 @@
+@tool
 extends Control
 signal up
 signal down
 
 func _ready():
-	%previous_button.pressed.connect(up.emit)	
-	%next_button.pressed.connect(down.emit)	
+	if Engine.is_editor_hint() and EditorInterface.get_edited_scene_root().get_parent().is_ancestor_of(self):
+		return
+	%previous_button.pressed.connect(up.emit)
+	%next_button.pressed.connect(down.emit)
 	%previous_button.pressed.connect(%previous_button.release_focus)
 	%next_button.pressed.connect(%next_button.release_focus)
-	%previous_button.resized.connect(func():%previous_button.custom_minimum_size.x = %previous_button.size.y)
-	%next_button.resized.connect(func():	%next_button.custom_minimum_size.x = %next_button.size.y)	
+	%previous_button.resized.connect(func(): %previous_button.custom_minimum_size.x = %previous_button.size.y)
+	%next_button.resized.connect(func(): %next_button.custom_minimum_size.x = %next_button.size.y)
 	if %previous_button.has_theme_icon("icon"):
 		%previous_button.icon = null
 	if %next_button.has_theme_icon("icon"):
@@ -21,4 +24,3 @@ func _ready():
 		%next_button.theme_type_variation = theme_type_variation + "_" + "up_button"
 	if not %previous_button.theme_type_variation:
 		%previous_button.theme_type_variation = theme_type_variation + "_" + "down_button"
-	
