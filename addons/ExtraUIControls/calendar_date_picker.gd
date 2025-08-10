@@ -37,6 +37,7 @@ func _ready():
 	prev_month_button.theme_type_variation = theme_type_variation + "_" + "calendar_day"
 	next_month_button.theme_type_variation = theme_type_variation + "_" + "calendar_day"
 	month_year_label.theme_type_variation = theme_type_variation + "_" + "calendar_day"
+	%confirm_year_button.theme_type_variation = theme_type_variation + "_" + "calendar_day"
 	%TodayButton.theme_type_variation = theme_type_variation + "_" + "calendar_day"
 	%YearsSpinBox.theme_type_variation = theme_type_variation + "_" + "years_spinbox"	
 	# Connect button signals
