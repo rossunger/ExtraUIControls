@@ -1,8 +1,7 @@
-# CalendarDatePicker.gd
+@tool
 extends Control
 
 signal date_selected(date_dict)
-
 # Scene nodes
 @onready var month_year_label: Button = %MonthYearLabel
 @onready var prev_month_button: Button = %PrevMonthButton
@@ -18,6 +17,7 @@ var day_labels = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"]
 var month_names = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
 
 func _ready():
+	#if Engine.is_editor_hint(): return
 	var options = ""
 	for i in 200:
 		options += str(1900 + i, "\n")
@@ -33,28 +33,29 @@ func _ready():
 	else:
 		selected_day = -1
 	
+	# Theme 
+	prev_month_button.theme_type_variation = theme_type_variation + "_" + "calendar_day"
+	next_month_button.theme_type_variation = theme_type_variation + "_" + "calendar_day"
+	month_year_label.theme_type_variation = theme_type_variation + "_" + "calendar_day"
+	%TodayButton.theme_type_variation = theme_type_variation + "_" + "calendar_day"
+	%YearsSpinBox.theme_type_variation = theme_type_variation + "_" + "years_spinbox"	
 	# Connect button signals
 	prev_month_button.pressed.connect(_on_prev_month_pressed)
 	next_month_button.pressed.connect(_on_next_month_pressed)
-	month_year_label.pressed.connect(func():
-		day_buttons_grid.visible = false
-		%YearsSpinBox.visible = true
+	month_year_label.toggled.connect(func(on):		
+		day_buttons_grid.visible = not on
+		%YearsSpinBox.visible = on
 		%YearsSpinBox.set_deferred("value", current_year - 1900)
-		%confirm_year_button.visible = true
-		month_year_label.disabled = true
-		%PrevMonthButton.disabled = true
-		%NextMonthButton.disabled = true
-		
+		%confirm_year_button.visible = on
+		#month_year_label.disabled = on
+		prev_month_button.disabled = on
+		next_month_button.disabled = on
+		%TodayButton.disabled = on		
 	)
 	%confirm_year_button.pressed.connect(func():
-		day_buttons_grid.visible = true
-		%YearsSpinBox.visible = false
-		%confirm_year_button.visible = false
-		month_year_label.disabled = false
-		%PrevMonthButton.disabled = false
-		%NextMonthButton.disabled = false
 		current_year = 1900 + %YearsSpinBox.value
 		_update_calendar_view()
+		month_year_label.button_pressed = false						
 	)
 	%TodayButton.pressed.connect(set_date.bind(Time.get_datetime_dict_from_system()))
 	# Draw the initial calendar view
@@ -110,6 +111,7 @@ func _update_calendar_view():
 	for i in range(first_day_weekday):
 		var button = Button.new()
 		button.text = ""
+		button.theme_type_variation = theme_type_variation + "_" + "calendar_day_blank"
 		button.disabled = true
 		day_buttons_grid.add_child(button)
 
