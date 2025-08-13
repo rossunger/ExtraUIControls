@@ -1,0 +1,78 @@
+[gd_scene load_steps=9 format=3 uid="uid://cfd1spexwr3yy"]
+
+[ext_resource type="Script" uid="uid://cgtj82see1tpg" path="res://addons/ExtraUIControls/tag_filter_group_sort_search.gd" id="1_ea5yg"]
+[ext_resource type="Texture2D" uid="uid://b2bpy7lilw6oc" path="res://addons/ExtraUIControls/icons/icon_tag.svg" id="2_tf32b"]
+[ext_resource type="Texture2D" uid="uid://c25qyfqcmxij7" path="res://addons/ExtraUIControls/icons/icon_grouping.svg" id="3_v0t3b"]
+[ext_resource type="Texture2D" uid="uid://cxpnv0cdu6q1u" path="res://addons/ExtraUIControls/icons/icon_sort.svg" id="5_fsbne"]
+[ext_resource type="PackedScene" uid="uid://dl27xojitjda0" path="res://addons/ExtraUIControls/search_component.tscn" id="6_eqb23"]
+[ext_resource type="PackedScene" uid="uid://cd3avhvtg0qj8" path="res://addons/ExtraUIControls/tag_picker.tscn" id="7_0qh8c"]
+[ext_resource type="PackedScene" uid="uid://bitgq7akn5iyr" path="res://addons/ExtraUIControls/sort_picker.tscn" id="8_ea5yg"]
+[ext_resource type="PackedScene" uid="uid://ceg75muk24w6s" path="res://addons/ExtraUIControls/group_picker.tscn" id="8_jiqe5"]
+
+[node name="tag_filter_group_sort_search" type="PanelContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_ea5yg")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="tag_button" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+toggle_mode = true
+icon = ExtResource("2_tf32b")
+expand_icon = true
+
+[node name="grouping_button" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+toggle_mode = true
+icon = ExtResource("3_v0t3b")
+expand_icon = true
+
+[node name="sort_button" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+toggle_mode = true
+icon = ExtResource("5_fsbne")
+expand_icon = true
+
+[node name="search" parent="MarginContainer/VBoxContainer/HBoxContainer" instance=ExtResource("6_eqb23")]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="tags_tab" parent="MarginContainer/VBoxContainer" instance=ExtResource("7_0qh8c")]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+size_flags_horizontal = 0
+toggle_mode_only = true
+
+[node name="groups_tab" parent="MarginContainer/VBoxContainer" instance=ExtResource("8_jiqe5")]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+size_flags_horizontal = 0
+toggle_mode_only = true
+
+[node name="sort_tab" parent="MarginContainer/VBoxContainer" instance=ExtResource("8_ea5yg")]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2

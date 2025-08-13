@@ -1,0 +1,40 @@
+[gd_scene load_steps=4 format=3 uid="uid://bleg3yjf554m2"]
+
+[ext_resource type="Script" uid="uid://djr283hwuhs4m" path="res://addons/ExtraUIControls/tag_setter.gd" id="1_ggp4w"]
+[ext_resource type="PackedScene" uid="uid://dl27xojitjda0" path="res://addons/ExtraUIControls/search_component.tscn" id="1_s1air"]
+[ext_resource type="PackedScene" uid="uid://cd3avhvtg0qj8" path="res://addons/ExtraUIControls/tag_picker.tscn" id="2_ggp4w"]
+
+[node name="tag_setter" type="PanelContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_ggp4w")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="object_search" parent="HBoxContainer/VBoxContainer" instance=ExtResource("1_s1air")]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="object_tree" type="Tree" parent="HBoxContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+hide_folding = true
+hide_root = true
+select_mode = 2
+
+[node name="tag_picker" parent="HBoxContainer" instance=ExtResource("2_ggp4w")]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+show_filter_buttons = false
+toggle_mode_only = true

@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://brph3xwt38hpy"]
+[gd_scene load_steps=24 format=3 uid="uid://brph3xwt38hpy"]
 
 [ext_resource type="PackedScene" uid="uid://d22l2ehhu8xsq" path="res://addons/ExtraUIControls/modal.tscn" id="1_uhqqe"]
 [ext_resource type="PackedScene" uid="uid://dwdiwvkeqapeg" path="res://addons/ExtraUIControls/carousel.tscn" id="1_uhqqf"]
@@ -10,6 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://bho8o6h3xki8f" path="res://addons/ExtraUIControls/calendar_date_picker.tscn" id="4_buypi"]
 [ext_resource type="PackedScene" uid="uid://0irbv5jkmaof" path="res://addons/ExtraUIControls/spin_box_extra.tscn" id="6_8pr8v"]
 [ext_resource type="PackedScene" uid="uid://csgaqhvbncb00" path="res://addons/ExtraUIControls/panel_margin_container.tscn" id="10_vr1i5"]
+[ext_resource type="PackedScene" uid="uid://cfd1spexwr3yy" path="res://addons/ExtraUIControls/tag_filter_group_sort_search.tscn" id="11_gqfrt"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rpuu0"]
 bg_color = Color(0.437827, 0.616476, 0.806671, 1)
@@ -382,5 +383,17 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 0
 grow_vertical = 2
+
+[node name="tag_filter_group_sort_search" parent="." instance=ExtResource("11_gqfrt")]
+layout_mode = 0
+anchors_preset = 0
+anchor_right = 0.0
+anchor_bottom = 0.0
+offset_left = 478.0
+offset_top = 43.0
+offset_right = 714.0
+offset_bottom = 95.0
+grow_horizontal = 1
+grow_vertical = 1
 
 [editable path="PanelMarginContainer"]
