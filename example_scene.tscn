@@ -281,9 +281,10 @@ layout_mode = 2
 text = "fvdafvadf"
 
 [node name="SpinBoxExtra" parent="MarginContainer/Accordion" instance=ExtResource("6_8pr8v")]
-custom_minimum_size = Vector2(34, 45)
+custom_minimum_size = Vector2(35, 69)
 layout_mode = 2
 size_flags_horizontal = 3
+font_size = 33
 margins = 0
 
 [node name="InputOTP" parent="MarginContainer/Accordion" instance=ExtResource("1_uhqqg")]

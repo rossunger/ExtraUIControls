@@ -33,12 +33,16 @@ enum DIRECTIONS {
 		clip_options = val
 		updating_settings = true
 
+@export var max_value = -1
+@export var min_value = -1
+
 @export_tool_button("update") var update_button = update_settings
 
 var value = 0:
 	set(val):
-		value = val
-		updating_settings = true
+		if dragging or value == val: return		
+		value = loop_value(val)		
+		updating_settings = true		
 
 var dragging = false
 var original_mouse_position: Vector2
@@ -98,21 +102,51 @@ func get_min_x() -> int:
 	var font: Font = label.get_theme_font("font")
 	return font.get_string_size(longest_row, HORIZONTAL_ALIGNMENT_CENTER, -1, font_size).x
 
+func loop_value(val):
+	if looping:				
+		if min_value != -1 and val < min_value:
+			if max_value != -1:
+				val = max_value
+			else:
+				val = label.get_line_count() - 1
+		elif val < 0: 
+			if max_value != -1:
+				val = max_value
+			else:
+				val = label.get_line_count() - 1			
+		if max_value != -1 and val > max_value:
+			if min_value != -1:
+				val = min_value
+			else:
+				val = 0
+		elif val > label.get_line_count() - 1:
+			if min_value != -1:
+				val = min_value
+			else:
+				val = 0
+	else:
+		var true_max = min(max_value, label.get_line_count() - 1) if max_value != -1 else label.get_line_count() - 1
+		val = clamp( val, max(min_value, 0), true_max)
+	return val
+
 func next():
-	value = value + 1 if value < label.get_line_count() - 1 else 0
+	value = value + 1
+	value_changed.emit.call_deferred(value)
 
 func previous():
-	value = value - 1 if value > 0 else label.get_line_count() - 1
+	value = value - 1
+	value_changed.emit.call_deferred(value)
 		
 func _gui_input(event: InputEvent) -> void:
 	if Engine.is_editor_hint() and EditorInterface.get_edited_scene_root().get_parent().is_ancestor_of(self):
 		return
 	if event is InputEventScreenTouch:
 		if dragging and event.pressed == false:
+			dragging = false
 			value = - round(label.position.y / label.get_line_height())
 			Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
-			Input.warp_mouse(original_mouse_position + global_position)
-			dragging = false
+			Input.warp_mouse(original_mouse_position + global_position)			
+			value_changed.emit.call_deferred(value)
 	elif event is InputEventScreenDrag:
 		if not dragging:
 			Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
@@ -133,3 +167,8 @@ func _gui_input(event: InputEvent) -> void:
 					label.position.x = max_x
 				elif label.position.x == max_x and event.screen_relative.y > 0:
 					label.position.x = 0
+	elif event is InputEventMouseButton and event.pressed and event.button_index in [MOUSE_BUTTON_WHEEL_UP, MOUSE_BUTTON_WHEEL_DOWN]:
+		if event.button_index == MOUSE_BUTTON_WHEEL_UP:			
+			next()
+		elif event.button_index == MOUSE_BUTTON_WHEEL_DOWN:					
+			previous()
